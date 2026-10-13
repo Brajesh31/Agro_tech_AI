@@ -1,5 +1,5 @@
 Flask==3.0.3
-Flask-Cors==5.0.0
+Flask-Cors==6.0.5
 keras==3.6.0
 numpy==1.26.4
 tensorflow==2.17.0
