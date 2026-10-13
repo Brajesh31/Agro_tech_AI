@@ -1,60 +1,92 @@
-name: 📝 Documentation Update
-description: Improve Documentation
-title: "[Documentation Update]: "
-labels: 'enhancement'
+name: Documentation update
+description: Report missing, unclear, outdated, or incorrect documentation.
+title: "[Docs]: "
+labels:
+  - documentation
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Please describe the reader problem and link to the relevant source file, section, or command. Do not include secrets or private deployment details.
+
   - type: checkboxes
     id: existing-issue
     attributes:
-      label: Is there an existing issue for this?
-      description: Please search to see if an issue already exists for the updates you want to make.
+      label: Existing issue check
       options:
-        - label: I have searched the existing issues
+        - label: I have searched existing issues and could not find a duplicate.
           required: true
+
+  - type: input
+    id: affected-document
+    attributes:
+      label: Affected document
+      description: Provide the path or URL of the page that needs attention.
+      placeholder: docs/installation.md
+    validations:
+      required: true
+
+  - type: dropdown
+    id: document-area
+    attributes:
+      label: Documentation area
+      options:
+        - installation
+        - development
+        - architecture
+        - deployment
+        - API
+        - database
+        - troubleshooting
+        - FAQ
+        - project policy
+        - other repository documentation
+    validations:
+      required: true
+
   - type: textarea
     id: issue-description
     attributes:
-      label: Issue Description
-      description: Please provide a clear description of the documentation update you are suggesting.
-      placeholder: Describe the improvement or correction you'd like to see in the documentation.
+      label: What is unclear or incorrect?
+      description: Explain the reader's problem and include the current text or command when useful.
+      placeholder: Describe the missing, outdated, or misleading information.
     validations:
       required: true
+
   - type: textarea
     id: suggested-change
     attributes:
-      label: Suggested Change
-      description: Provide details of the proposed change to the documentation.
-      placeholder: Explain how the documentation should be updated or corrected.
+      label: Suggested change
+      description: Provide corrected wording, commands, examples, or links where possible.
     validations:
       required: true
+
   - type: textarea
-    id: rationale
+    id: verification
     attributes:
-      label: Rationale
-      description: Why is this documentation update necessary or beneficial?
-      placeholder: Explain the importance or reasoning behind the suggested change.
-    validations:
-      required: False
+      label: Source or verification
+      description: Explain how the proposed information was verified against the code, scripts, deployment, or official documentation.
+      placeholder: I verified this against ...
+
   - type: dropdown
-    id: urgency
+    id: audience
     attributes:
-      label: Urgency
-      description: How urgently do you believe this documentation update is needed?
+      label: Primary audience
       options:
-        - High
-        - Medium
-        - Low
-      default: 0
+        - new user
+        - contributor
+        - API integrator
+        - operator or deployer
+        - researcher or model contributor
     validations:
       required: true
+
   - type: checkboxes
     id: terms
     attributes:
-      label: Record
+      label: Submission checklist
       options:
-        - label: "I have read the Contributing Guidelines"
+        - label: I have read the Contributing Guidelines.
           required: true
-        - label: "I'm a GSSOC'24 contributor"
-          required: false
-        - label: "I have starred the repository"
+        - label: I have removed secrets and private data from this report.
           required: true
