@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: "AgroTech AI"
+message: "If you use AgroTech AI in research or an application, please cite this repository."
+type: software
+authors:
+  - family-names: "31"
+    given-names: "Brajesh"
+    alias: "Brajesh31"
+repository-code: "https://github.com/Brajesh31/Agro_tech_AI"
+url: "https://github.com/Brajesh31/Agro_tech_AI"
+license: MIT
+version: "0.1.0"
+date-released: "2026-10-13"

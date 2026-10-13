@@ -1,0 +1,6 @@
+# Default reviewers for the repository.
+* @Brajesh31
+
+# Keep documentation and workflow changes visible to the repository owner.
+/.github/ @Brajesh31
+/docs/ @Brajesh31
