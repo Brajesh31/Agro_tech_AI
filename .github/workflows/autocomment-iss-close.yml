@@ -1,29 +1,29 @@
-name: Comment on Issue Close
+name: Comment on issue close
 
 on:
   issues:
     types: [closed]
 
 jobs:
-  greet-on-close:
+  comment:
     runs-on: ubuntu-latest
     permissions:
       issues: write
     steps:
-      - name: Greet User
-        uses: actions/github-script@v5
+      - name: Thank issue author
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const issue = context.payload.issue;
-            const issueCreator = issue.user.login;
-            const issueNumber = issue.number;
-
-            const greetingMessage = `Hello @${issueCreator}! Your issue #${issueNumber} has been closed. Thank you for your contribution!`;
+            const greetingMessage = [
+              `Hello @${issue.user.login}!`,
+              `Issue #${issue.number} has been closed. Thank you for contributing to AgroTech AI.`,
+            ].join(' ');
 
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: issueNumber,
+              issue_number: issue.number,
               body: greetingMessage
             });
