@@ -1,55 +1,99 @@
-name: Bug report 🐞
-description: File a bug report
+name: Bug report
+description: Report a reproducible problem in an AgroTech AI service.
 title: "[Bug]: "
-labels: bug
+labels:
+  - bug
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a problem. Please remove credentials, personal data, private URLs, and production identifiers before submitting. Use the private process in `SECURITY.md` for vulnerabilities.
+
   - type: checkboxes
     id: existing-issue
     attributes:
-      label: Is there an existing issue for this?
-      description: Please search to see if an issue already exists for the bug you encountered.
+      label: Existing issue check
       options:
-        - label: I have searched the existing issues
+        - label: I have searched existing issues and could not find a duplicate.
           required: true
+
+  - type: dropdown
+    id: service
+    attributes:
+      label: Affected service
+      description: Select the service or area where the problem occurs.
+      options:
+        - frontend
+        - backend
+        - agro-quiz-app
+        - agrotech-ai-apis
+        - api
+        - specialist Python API
+        - chatbot
+        - Docker Compose
+        - documentation
+        - unknown
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Commit, branch, or release
+      placeholder: main, commit SHA, or release tag
+    validations:
+      required: true
+
   - type: textarea
     id: what-happened
     attributes:
-      label: Describe the bug
-      description: A concise description of what you are experiencing.
-      placeholder: Tell us what you see!
+      label: What happened?
+      description: Describe the problem and include the smallest relevant log or response.
+      placeholder: Tell us what you observed.
     validations:
       required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include commands, endpoint, request shape, and input conditions. Redact secrets and personal data.
+      placeholder: |
+        1. Start ...
+        2. Run ...
+        3. Observe ...
+    validations:
+      required: true
+
   - type: textarea
     id: expected-behaviour
     attributes:
       label: Expected behavior
-      description: A clear and concise description of what you expected to happen.
+      description: What should have happened?
     validations:
       required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include OS, Node.js/npm, Python, Docker, browser, and relevant model/runtime versions.
+      placeholder: Windows 11, Node 18.x, Python 3.x, Docker Desktop ...
+    validations:
+      required: true
+
   - type: textarea
     id: screenshots
     attributes:
-      label: Add ScreenShots
-      description: Add sufficient ScreenShots to explain your issue.
-  - type: dropdown
-    id: devices
-    attributes:
-      label: On which device are you experiencing this bug?
-      multiple: true
-      options:
-        - Android
-        - iPhone
-        - Linux
-        - Chrome
-        - Windows
+      label: Screenshots or logs
+      description: Add only sanitized screenshots or logs that do not contain secrets or private data.
+
   - type: checkboxes
     id: terms
     attributes:
-      label: Record
+      label: Submission checklist
       options:
-        - label: "I have read the Contributing Guidelines"
+        - label: I have read the Contributing Guidelines.
           required: true
-        - label: "I'm a GSSOC'24 contributor"
-          required: False
-        - label: "I have starred the repository"
+        - label: I have removed secrets and private data from this report.
           required: true
