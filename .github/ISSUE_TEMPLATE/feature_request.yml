@@ -1,63 +1,99 @@
-name: ✨ Feature Request
-description: Suggest a feature
-title: "[Feature Request]: "
-labels: enhancement
+name: Feature request
+description: Propose a focused improvement to AgroTech AI.
+title: "[Feature]: "
+labels:
+  - enhancement
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Strong proposals describe the user problem and measurable outcome. For model features, include data quality, safety, privacy, and evaluation considerations.
+
   - type: checkboxes
     id: existing-issue
     attributes:
-      label: Is there an existing issue for this?
-      description: Please search to see if an issue already exists for this feature.
+      label: Existing issue check
       options:
-        - label: I have searched the existing issues
+        - label: I have searched existing issues and could not find a duplicate.
           required: true
+
   - type: textarea
-    id: feature-description
+    id: problem
     attributes:
-      label: Feature Description
-      description: Please provide a detailed description of the feature you are requesting.
-      placeholder: Describe the new feature or enhancement you'd like to see.
+      label: User problem
+      description: Who is affected, and what problem or opportunity should the project address?
+      placeholder: Farmers, operators, or contributors currently ...
     validations:
       required: true
+
   - type: textarea
-    id: use-case
+    id: proposed-solution
     attributes:
-      label: Use Case
-      description: How would this feature enhance your use of the project?
-      placeholder: Describe a specific use case or scenario where this feature would be beneficial.
+      label: Proposed solution
+      description: Describe the behavior, interface, endpoint, or workflow you want.
     validations:
       required: true
+
   - type: textarea
-    id: benefits
+    id: success-criteria
     attributes:
-      label: Benefits
-      description: What benefits would this feature bring to the project or community?
-      placeholder: Explain the advantages of implementing this feature.
+      label: Success criteria
+      description: How would we know this feature is useful and complete?
+      placeholder: A user can ...; the API returns ...; evaluation reaches ...
+    validations:
+      required: true
+
   - type: textarea
-    id: screenShots
+    id: alternatives
     attributes:
-      label: Add ScreenShots
-      description: If any...
+      label: Alternatives considered
+      description: Describe other approaches or current workarounds.
+
+  - type: dropdown
+    id: affected-area
+    attributes:
+      label: Affected area
+      options:
+        - frontend
+        - backend
+        - AI/ML API
+        - chatbot
+        - quiz application
+        - deployment and operations
+        - documentation
+        - developer tooling
+    validations:
+      required: true
+
   - type: dropdown
     id: priority
     attributes:
       label: Priority
-      description: How important is this feature to you?
       options:
-        - High
-        - Medium
-        - Low
-      default: 0
+        - high
+        - medium
+        - low
     validations:
       required: true
+
+  - type: textarea
+    id: safety-data
+    attributes:
+      label: Safety, privacy, and data considerations
+      description: Note personal data, uploaded images, model limitations, consent, external providers, or other risks.
+
+  - type: textarea
+    id: supporting-material
+    attributes:
+      label: Supporting material
+      description: Add sanitized screenshots, mockups, examples, research, or links.
+
   - type: checkboxes
     id: terms
     attributes:
-      label: Record
+      label: Submission checklist
       options:
-        - label: "I have read the Contributing Guidelines"
+        - label: I have read the Contributing Guidelines.
           required: true
-        - label: "I'm a GSSOC'24 contributor"
-          required: false
-        - label: "I have starred the repository"
+        - label: I have removed secrets and private data from this proposal.
           required: true
