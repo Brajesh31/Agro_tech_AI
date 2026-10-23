@@ -1,4 +1,4 @@
-﻿click==7.1.2
+click==7.1.2
 Flask==1.1.2
 flask-cors
 gunicorn==20.1.0
@@ -15,5 +15,5 @@ six==1.15.0
 torch==1.8.1+cpu
 # -f https://download.pytorch.org/whl/torch_stable.html
 torchvision==0.9.1+cpu
-typing-extensions==3.7.4.3
+typing-extensions==4.16.0
 Werkzeug==1.0.1
