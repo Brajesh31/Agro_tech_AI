@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-import json
 import logging
 from groq import Groq
 import time
@@ -13,24 +12,9 @@ CORS(app)  # Enable CORS for all routes
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Load API key
-working_dir = os.path.dirname(os.path.abspath(__file__))
-try:
-    config_data = json.load(open(f"{working_dir}/config.json"))
-    GROQ_API_KEY = config_data["GROQ_API_KEY"]
-    os.environ["GROQ_API_KEY"] = GROQ_API_KEY
-    logger.info("API key loaded successfully.")
-except FileNotFoundError:
-    logger.error("config.json file not found. Please add your API key in config.json.")
-    raise
-except KeyError:
-    logger.error("GROQ_API_KEY is missing in config.json.")
-    raise
-except Exception as e:
-    logger.error(f"Failed to load API key: {e}")
-    raise
-
-client = Groq()
+# Load credentials from the environment. Keep real keys out of tracked files.
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 
 # Rate limiting variables
 RATE_LIMIT = 20  # Maximum 20 requests per minute
@@ -110,7 +94,10 @@ def chat():
         logger.info(f"Premade response provided for IP {ip}: {user_prompt}")
         return jsonify({"response": premade_requests[user_prompt]})
 
-    # If not a pre-made prompt, use the LLM
+    # If not a pre-made prompt, use the LLM.
+    if client is None:
+        return jsonify({"error": "Chatbot provider is not configured."}), 503
+
     messages = [
         {'role': "system", "content": "You are an AI assistant for AgroTech AI, an innovative platform that leverages artificial intelligence to enhance agricultural practices. Provide helpful and accurate information about AgroTech AI's services and agricultural technology."},
         {"role": "user", "content": user_prompt}
