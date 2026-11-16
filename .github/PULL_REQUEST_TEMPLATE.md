@@ -1,53 +1,46 @@
-## Summary
+# 🔀 Pull Request
 
-<!-- Explain what changed and why. Link the issue, for example: Fixes #123. -->
+## Summary
+Describe the change and the problem it solves.
 
 ## Affected services
+- [ ] frontend
+- [ ] backend
+- [ ] agro-quiz-app
+- [ ] Python / ML API
+- [ ] chatbot
+- [ ] Docker / deployment
+- [ ] Documentation
+- [ ] Repository maintenance
 
-- [ ] `frontend`
-- [ ] `backend`
-- [ ] `agro-quiz-app`
-- [ ] Flask or ML service: <!-- name it -->
-- [ ] Chatbot
-- [ ] Documentation or repository tooling
-
-## Changes
-
-<!-- List the important implementation, API, model, configuration, or documentation changes. -->
+## Implementation details
+List the main files, routes, components, models, or workflows changed.
 
 ## Validation
+- [ ] Relevant lint command passed.
+- [ ] Relevant production build passed.
+- [ ] Relevant automated tests passed.
+- [ ] API smoke tests passed for service changes.
+- [ ] Image upload and invalid payload cases checked where applicable.
+- [ ] Docker configuration validated where applicable.
+- [ ] No credentials, personal data, or sensitive logs included.
 
-<!-- List the exact commands and smoke tests run. Include relevant output or links when useful. -->
+Describe commands run and results:
 
-- [ ] Targeted tests pass.
-- [ ] Relevant lint/build checks pass.
-- [ ] Manual smoke test completed where applicable.
-- Commands run:
+## API changes
+List changed routes, methods, request fields, response shape, authentication, and error behavior. Update docs/api.md when necessary.
 
-## API or model impact
+## ML / model changes
+Document dataset source and license, preprocessing, model artifact version, feature schema, labels, evaluation split, metrics, and limitations.
 
-- [ ] No API or model behavior change.
-- [ ] API contract or endpoint behavior changed and `docs/api.md` was updated.
-- [ ] Model, preprocessing, labels, or evaluation changed and limitations are documented.
-- [ ] Database schema or migration behavior changed and `docs/database.md` was updated.
+## Database changes
+Describe schema changes, indexes, migration steps, and rollback considerations.
 
-## Security and privacy
+## Security and privacy review
+Explain changes to authentication, CORS, secrets, uploads, logs, retention, and personal data handling.
 
-- [ ] No secrets, tokens, personal data, or private URLs are included.
-- [ ] Inputs, uploads, authentication, authorization, and error handling were reviewed where relevant.
-- [ ] New external services, permissions, or data collection are documented.
-
-## Documentation and compatibility
-
-- [ ] Relevant documentation is updated.
-- [ ] Environment examples are updated without real credentials.
-- [ ] The change is backward-compatible, or breaking changes are clearly described below.
-- [ ] Deployment or rollback considerations are documented when needed.
-
-## Screenshots or examples
-
-<!-- Add sanitized screenshots, request/response examples, or logs when useful. -->
-
-## Reviewer notes
-
-<!-- Call out known limitations, follow-up work, migration steps, or areas needing special review. -->
+## Checklist
+- [ ] Documentation updated.
+- [ ] Environment samples updated without real credentials.
+- [ ] No generated caches, logs, or accidental large artifacts included.
+- [ ] The change is focused and ready for review.
