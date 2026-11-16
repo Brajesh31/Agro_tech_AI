@@ -7,6 +7,7 @@ This documentation describes the multi-service AgroTech AI repository. Start wit
 | Guide | Purpose |
 |---|---|
 | [Architecture](architecture.md) | Main app, backend, database, and specialist service boundaries |
+| [Service catalog](service-catalog.md) | Directory-by-directory service map and local guides |
 | [Configuration](configuration.md) | Environment variables and secret handling |
 | [Models and data](models.md) | Model artifacts, provenance, evaluation, and limitations |
 | [Model card template](model-card-template.md) | Standard documentation template for ML models |
