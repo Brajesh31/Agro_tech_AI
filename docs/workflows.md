@@ -29,7 +29,7 @@ The comment, stale-item, and timestamp workflows are repository automation. They
 
 ## README timestamp automation caution
 
-The current README workflow runs hourly and pushes directly to the default branch. This can create unnecessary commits and can fail when repository token permissions or branch rules prohibit direct pushes. Prefer updating the README only when meaningful content changes, or remove timestamp automation if it provides no value.
+The README workflow now runs weekly or by manual dispatch, rather than on every push and every hour. It still pushes a timestamp commit to the default branch, so confirm that repository Actions permissions and branch rules permit this. If the timestamp has no practical value, disable the workflow.
 
 ## Dependabot
 
