@@ -8,7 +8,8 @@ This directory contains irrigation-related model training and prediction assets.
 - `irrigation_model.pkl`: serialized trained model.
 - `label_encoder.py` and `label_encoder.pkl`: label encoding helper/artifact.
 - `simulated_irrigation_data.csv`: simulated training data.
-- `app.py` and `requirements.txt`: currently empty placeholders.
+- `app.py`: currently an empty placeholder.
+- `requirements.txt`: dependencies for the existing training script.
 
 ## Important status
 
