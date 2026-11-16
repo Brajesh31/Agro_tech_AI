@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability reporting
+    url: https://github.com/Brajesh31/Agro_tech_AI/blob/main/SECURITY.md
+    about: Report security issues privately. Do not publish secrets or private user data.
+  - name: Project documentation
+    url: https://github.com/Brajesh31/Agro_tech_AI/tree/main/docs
+    about: Review setup, architecture, API, and troubleshooting guides.
