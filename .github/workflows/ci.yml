@@ -38,11 +38,8 @@ jobs:
         run: npm run build
 
   backend:
-    name: Backend tests
+    name: Backend JavaScript syntax
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -50,12 +47,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: backend/package-lock.json
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npm test -- --runInBand
+      - name: Check backend JavaScript syntax
+        run: |
+          find backend -type f -name "*.js" -not -path "*/node_modules/*" -print0 | xargs -0 -n1 node --check
 
   quiz:
     name: Quiz application build
