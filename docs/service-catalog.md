@@ -9,7 +9,7 @@ AgroTech AI is a multi-service repository. This catalog maps the main directorie
 | Browser frontend | `frontend/` | [Frontend README](../frontend/README.md) |
 | Express backend | `backend/` | [Backend README](../backend/README.md) |
 | Quiz application | `agro-quiz-app/` | [Quiz README](../agro-quiz-app/README.md) |
-| Streamlit chatbot | `agrotech-ai-chatbot/` | [Chatbot README](../agrotech-ai-chatbot/README.md) |
+| Flask chatbot API | `agrotech-ai-chatbot/` | [Chatbot README](../agrotech-ai-chatbot/README.md) |
 
 ## Consolidated APIs
 
