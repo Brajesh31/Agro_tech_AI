@@ -25,13 +25,13 @@ Reports will be reviewed in good faith. Maintainers will investigate and coordin
 
 The inspected source has security concerns that should be addressed before public production deployment:
 
-1. `backend/index.js` contains a literal Express session secret. Replace it with a unique high-entropy environment secret and configure secure cookie settings.
+1. The hard-coded Express session secret has been removed. The backend now requires a unique `SESSION_SECRET` in production and sets HTTP-only, secure-in-production, same-site cookies.
 2. Groq credentials were previously stored in tracked JSON configuration files in `api/` and `agrotech-ai-chatbot/`, and a Google API key was present in `agrotech-ai-apis/.env-sample`. The current versions use environment variables and empty samples. Rotate every exposed credential because Git history may still contain the original values.
 3. `frontend/.env.sample` previously included a Mapbox-looking access token. Verify ownership and scope; rotate it if necessary. Keep only intentionally public, restricted tokens in frontend configuration.
 4. `backend/.env.sample` previously supplied a weak JWT placeholder. Use an empty sample and generate a unique secret per environment.
-5. Some Flask APIs configure permissive CORS. Restrict allowed origins before deployment.
+5. The Express backend now uses the `FRONTEND_ORIGIN` allowlist. Several Flask APIs still configure permissive CORS and must be restricted before deployment.
 6. Review exception handlers for responses that may expose provider or server details.
-7. `backend/routes/users.js` contains an incomplete route registration. Verify route loading and tests.
+7. The incomplete user profile GET route has been connected to JWT authentication and a safe field projection. The frontend token handling and profile update path still need integration testing.
 8. `backend/logs/error.log` is tracked in the inspected tree. Review for sensitive content, remove runtime logs from source control, and rotate any exposed credentials.
 
 ## Security requirements
