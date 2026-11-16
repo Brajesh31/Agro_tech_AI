@@ -2,7 +2,7 @@
 
 ## Overview
 
-AgroTech AI is a multi-service monorepo rather than a single deployable binary. The supported primary path is a browser frontend backed by an Express API and MongoDB. Flask and Streamlit services provide specialist machine-learning and agricultural capabilities and can be deployed independently.
+AgroTech AI is a multi-service monorepo rather than a single deployable binary. The supported primary path is a browser frontend backed by an Express API and MongoDB. Flask services provide specialist machine-learning and agricultural capabilities and can be deployed independently.
 
 ```text
 Browser
@@ -22,7 +22,7 @@ backend (Node.js + Express, :8080 in Compose)
 
 Optional:
 agro-quiz-app (Next.js)
-agrotech-ai-chatbot (Streamlit + Groq)
+agrotech-ai-chatbot (Flask + Groq)
 ```
 
 ## Service boundaries
@@ -40,7 +40,7 @@ The repository contains several Flask services because model dependencies and de
 - `agrotech-ai-apis/` is the broad consolidated service.
 - `api/` and `agrotech-api\`s/` are parallel/legacy consolidated variants.
 - `combined-disease-detection-api/`, `crop-rotation-api/`, `disease-prediction-api/`, `irrigation-api/`, `mushroom-edibility/`, `paddy-backend-api/`, `seed-qual-predictor/`, `soil-testing-labs-api/`, and `sugarcane-disease-api/` focus on individual capabilities.
-- `agrotech-ai-chatbot/` is a Streamlit chatbot and is not part of the primary Compose stack.
+- `agrotech-ai-chatbot/` is a standalone Flask chatbot API and is not part of the primary Compose stack.
 - `agro-quiz-app/` is a separate Next.js application.
 
 Do not expose every service publicly by default. Prefer a gateway, authentication, rate limiting, private networking, and explicit service allowlists.
