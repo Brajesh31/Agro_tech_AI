@@ -496,7 +496,7 @@ Security review is required before public deployment. The inspected source conta
 4. **Weak sample JWT value:** `backend/.env.sample` currently sets `JWT_SECRET=secret`. Replace this with an empty placeholder and generate a unique secret per environment.
 5. **CORS:** the Express backend now restricts origins using `FRONTEND_ORIGIN`. Several Flask APIs still need the same allowlist treatment before public deployment.
 6. **Verbose error responses:** inspect API handlers to ensure provider and server exceptions are not sent directly to public clients.
-7. **User profile route:** the incomplete Express route has been connected to an authenticated controller that returns only an allowlist of profile fields. Test the frontend authentication flow before relying on it.
+7. **User profile routes:** the broken route registration has been replaced with authenticated GET and PUT handlers. The handlers return allowlisted profile fields, and the frontend now reads the stored JWT correctly. Email changes remain read-only until a verification flow is implemented.
 8. **Untracked-log hygiene:** `backend/logs/error.log` is tracked. Confirm it contains no sensitive values, remove runtime logs from Git, and rotate exposed credentials as necessary.
 
 ### Immediate security actions
