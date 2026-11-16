@@ -73,7 +73,7 @@ AgroTech AI is organized into several independently maintained areas.
 | Quiz experience | `agro-quiz-app/` | Standalone Next.js quiz interface |
 | Consolidated ML API | `agrotech-ai-apis/` | Flask endpoints for multiple agricultural and classification features |
 | Additional API variant | `api/` | A separate collection of prediction and lookup endpoints |
-| Legacy API variant | `agrotech-api`s/` | Legacy crop, fertilizer, irrigation, soil and price services |
+| Legacy API variant | ``agrotech-api`s/`` | Legacy crop, fertilizer, irrigation, soil and price services |
 | Disease services | `combined-disease-detection-api/`, `disease-prediction-api/`, `paddy-backend-api/`, `sugarcane-disease-api/` | Plant and crop disease prediction |
 | Crop rotation | `crop-rotation-api/` | Crop rotation recommendation |
 | Irrigation | `irrigation-api/` | Irrigation prediction |
