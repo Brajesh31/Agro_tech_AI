@@ -45,11 +45,25 @@ const app = express();
 
 app.use(cors()); // This allows all origins to access your API
 
+const sessionSecret = process.env.SESSION_SECRET ||
+  (process.env.NODE_ENV === 'production'
+    ? null
+    : require('crypto').randomBytes(32).toString('hex'));
+
+if (!sessionSecret) {
+  throw new Error('SESSION_SECRET must be configured in production.');
+}
+
 app.use(
   session({
-    secret: 'your-secret-key',
+    secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+    },
   })
 );
 
