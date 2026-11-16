@@ -18,6 +18,14 @@ The AgroTech AI Quiz is a standalone Next.js application that provides an intera
 
 ## Install and run
 
+Create a local environment file for the server-side Gemini integration:
+
+```powershell
+Copy-Item .env.example .env.local
+```
+
+Set `GOOGLE_API_KEY` in `.env.local`. The app can build without the key, but AI quiz generation returns a configuration error until it is supplied.
+
 From this directory:
 
 ```powershell
