@@ -1,99 +1,76 @@
-name: Bug report
-description: Report a reproducible problem in an AgroTech AI service.
+name: "🐛 Bug report"
+description: Report a reproducible issue in a specific application or service.
 title: "[Bug]: "
-labels:
-  - bug
+labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for reporting a problem. Please remove credentials, personal data, private URLs, and production identifiers before submitting. Use the private process in `SECURITY.md` for vulnerabilities.
-
-  - type: checkboxes
-    id: existing-issue
-    attributes:
-      label: Existing issue check
-      options:
-        - label: I have searched existing issues and could not find a duplicate.
-          required: true
-
+        Do not include passwords, API keys, private user records, farm addresses, or confidential images.
   - type: dropdown
     id: service
     attributes:
       label: Affected service
-      description: Select the service or area where the problem occurs.
       options:
         - frontend
         - backend
         - agro-quiz-app
         - agrotech-ai-apis
         - api
-        - specialist Python API
+        - agrotech-api variant
+        - disease / crop API
+        - irrigation / soil / seed API
         - chatbot
-        - Docker Compose
-        - documentation
-        - unknown
+        - Docker / deployment
+        - Documentation
+        - Other
     validations:
       required: true
-
-  - type: input
-    id: version
-    attributes:
-      label: Commit, branch, or release
-      placeholder: main, commit SHA, or release tag
-    validations:
-      required: true
-
   - type: textarea
-    id: what-happened
+    id: summary
     attributes:
-      label: What happened?
-      description: Describe the problem and include the smallest relevant log or response.
-      placeholder: Tell us what you observed.
+      label: Problem summary
     validations:
       required: true
-
   - type: textarea
-    id: reproduction
+    id: steps
     attributes:
       label: Steps to reproduce
-      description: Include commands, endpoint, request shape, and input conditions. Redact secrets and personal data.
       placeholder: |
-        1. Start ...
-        2. Run ...
-        3. Observe ...
+        1. Start the service...
+        2. Send the request...
+        3. Observe the issue...
     validations:
       required: true
-
   - type: textarea
-    id: expected-behaviour
+    id: expected
     attributes:
       label: Expected behavior
-      description: What should have happened?
     validations:
       required: true
-
   - type: textarea
-    id: environment
+    id: actual
     attributes:
-      label: Environment
-      description: Include OS, Node.js/npm, Python, Docker, browser, and relevant model/runtime versions.
-      placeholder: Windows 11, Node 18.x, Python 3.x, Docker Desktop ...
+      label: Actual behavior
     validations:
       required: true
-
-  - type: textarea
-    id: screenshots
+  - type: input
+    id: runtime
     attributes:
-      label: Screenshots or logs
-      description: Add only sanitized screenshots or logs that do not contain secrets or private data.
-
+      label: Runtime versions
+      placeholder: "Node 20, Python 3.11, Docker version..."
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs
+      description: Remove tokens, passwords, personal records, and local secrets.
+      render: text
   - type: checkboxes
-    id: terms
+    id: checks
     attributes:
-      label: Submission checklist
+      label: Before submitting
       options:
-        - label: I have read the Contributing Guidelines.
+        - label: I tested against the intended service and environment.
           required: true
-        - label: I have removed secrets and private data from this report.
+        - label: I removed secrets and private data from this report.
           required: true
