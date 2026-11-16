@@ -33,7 +33,7 @@ Vite embeds `VITE_*` values in client assets. Never put private API keys, databa
 
 ## Python services
 
-Python APIs use different provider variables. Examples include `GOOGLE_API_KEY`, `GOOGLE_API_KEY`/Gemini, or Groq configuration in older code. Inspect the service source and local sample before running it.
+Python APIs use different provider variables. The consolidated APIs use `GOOGLE_API_KEY` for Gemini and `GROQ_API_KEY` for Groq integrations. The standalone chatbot also uses `GROQ_API_KEY`. Inspect the selected service source and its sample before running it.
 
 Do not store real provider keys in tracked `config.json` files. Move them to environment variables or a secret manager and rotate credentials that were previously committed.
 
