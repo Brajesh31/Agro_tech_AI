@@ -9,7 +9,7 @@ Install:
 - Git
 - Node.js 18 or newer and npm
 - Docker Desktop with Docker Compose
-- Python 3 for Flask/Streamlit services
+- Python 3 for Flask services
 - A compatible Python runtime for legacy TensorFlow/PyTorch services
 
 Check the primary tools:
@@ -95,7 +95,7 @@ streamlit run src\main.py
 
 ## Configuration
 
-Use environment variables for credentials. The root [`.env.example`](../.env.example) shows the common names, while service-local samples document additional values. Never copy real keys into `config.json`, source code, issues, or pull requests.
+Use environment variables for credentials. The root [`.env.example`](../.env.example) shows the common names, while service-local samples document additional values. Never copy real keys into JSON configuration files, source code, issues, or pull requests.
 
 ## Windows notes
 
