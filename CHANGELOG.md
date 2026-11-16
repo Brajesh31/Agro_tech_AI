@@ -6,10 +6,12 @@ All notable changes to AgroTech AI are documented here. This project follows a p
 
 ### Added
 
-- Comprehensive repository README and contributor documentation.
-- MIT license, security policy, support guidance, roadmap, and citation metadata.
-- Architecture, installation, development, deployment, API, database, troubleshooting, and FAQ documentation.
-- Repository hygiene files and GitHub contribution automation templates.
+- Expanded root README and directory-specific guides for the frontend, backend, consolidated APIs, and specialist agricultural services.
+- Service catalog covering the main applications and independent Python APIs.
+- Configuration, model, privacy, testing, workflow, maintenance, release-process, and model-card documentation.
+- CI workflow for frontend lint/build, quiz build, backend JavaScript syntax, and Python syntax checks.
+- Additional GitHub issue templates and a service-aware pull request template.
+- Repository hygiene configuration and safer environment examples.
 
 ### Changed
 
