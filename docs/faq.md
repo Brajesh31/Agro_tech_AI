@@ -2,7 +2,7 @@
 
 ## Is this one application or several?
 
-It is a monorepo containing a primary React/Express/MongoDB application plus independent Flask, Streamlit, and Next.js services. The root Compose file starts only the primary frontend, backend, and MongoDB services.
+It is a monorepo containing a primary React/Express/MongoDB application plus independent Flask and Next.js services. The root Compose file starts only the primary frontend, backend, and MongoDB services.
 
 ## Which service should I run first?
 
