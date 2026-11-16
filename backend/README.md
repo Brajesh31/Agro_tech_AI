@@ -60,4 +60,4 @@ Before production deployment:
 - Rotate credentials previously committed to source control.
 - Keep logs free of credentials and personal data.
 
-The current code includes an incomplete route registration in `routes/users.js`; validate server startup and route tests before deployment.
+The user profile GET route is registered with JWT authentication and returns only an allowlist of profile fields. Validate the frontend token handling and the full profile update flow before deployment.
