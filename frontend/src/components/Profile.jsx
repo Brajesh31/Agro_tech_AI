@@ -19,32 +19,56 @@ const Profile = () => {
   : 'http://localhost:8080';
 
 
+  const getAuthSession = () => {
+    try {
+      return JSON.parse(localStorage.getItem('auth') || 'null');
+    } catch {
+      return null;
+    }
+  };
+
+  const getUserIdFromToken = (token) => {
+    const payload = token.split('.')[1];
+    const normalized = payload.replace(/-/g, '+').replace(/_/g, '/');
+    const decoded = atob(normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '='));
+    return JSON.parse(decoded).userId;
+  };
+
   useEffect(() => {
-    const token = localStorage.getItem('auth'); 
-    if (token) {
-      const { userId } = JSON.parse(atob(token.split('.')[1]));
-      axios.get(`${ApiUrl}/api/users/${userId}`, { 
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      })
+    const authSession = getAuthSession();
+    const token = authSession?.token;
+
+    if (!token) {
+      setError("Please sign in to view your profile.");
+      setLoading(false);
+      return;
+    }
+
+    let userId;
+    try {
+      userId = getUserIdFromToken(token);
+    } catch {
+      setError("Your sign-in session is invalid. Please sign in again.");
+      setLoading(false);
+      return;
+    }
+
+    axios.get(`${ApiUrl}/api/users/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
       .then(response => {
         setUserData(response.data);
-        setFormData({ 
-          firstName: response.data.firstName, 
-          lastName: response.data.lastName, 
-          email: response.data.email 
+        setFormData({
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          email: response.data.email
         });
-        setLoading(false);
       })
       .catch(error => {
         console.error("Error fetching user data:", error);
         setError("Failed to load user data.");
-        setLoading(false);
-      });
-    } else {
-      setLoading(false);
-    }
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const handleEditToggle = () => {
@@ -57,22 +81,40 @@ const Profile = () => {
   };
 
   const handleSaveChanges = () => {
-    const token = localStorage.getItem('auth'); 
-    const { userId } = JSON.parse(atob(token.split('.')[1]));
+    const token = getAuthSession()?.token;
+    if (!token) {
+      setError("Your sign-in session has expired. Please sign in again.");
+      return;
+    }
 
-    axios.put(`${ApiUrl}/api/users/${userId}`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
+    let userId;
+    try {
+      userId = getUserIdFromToken(token);
+    } catch {
+      setError("Your sign-in session is invalid. Please sign in again.");
+      return;
+    }
+
+    axios.put(`${ApiUrl}/api/users/${userId}`, {
+      firstName: formData.firstName,
+      lastName: formData.lastName
+    }, {
+      headers: { Authorization: `Bearer ${token}` }
     })
-    .then(response => {
-      setUserData(response.data);
-      setIsEditing(false);
-    })
-    .catch(error => {
-      console.error("Error updating user data:", error);
-      setError("Failed to save changes.");
-    });
+      .then(response => {
+        setUserData(response.data);
+        setFormData({
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          email: response.data.email
+        });
+        setError(null);
+        setIsEditing(false);
+      })
+      .catch(error => {
+        console.error("Error updating user data:", error);
+        setError(error.response?.data?.message || "Failed to save changes.");
+      });
   };
 
   // Role-based quotes and images
@@ -180,9 +222,11 @@ const Profile = () => {
               type="email"
               name="email"
               value={formData.email}
-              onChange={handleChange}
-              className="border p-2 w-full"
+              className="border p-2 w-full bg-gray-100"
               placeholder="Email"
+              readOnly
+              disabled
+              title="Email changes require a separate verification flow."
             />
           </div>
         ) : (
