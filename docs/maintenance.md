@@ -24,9 +24,7 @@
 
 ## Repository hygiene findings
 
-The inspected tree currently includes Python bytecode cache files under `mushroom-edibility/data/__pycache__/` and `paddy-backend-api/__pycache__/`. These should not be versioned. The root `.gitignore` now ignores Python caches, but already tracked files must be removed from Git separately.
-
-The tree also contains a zero-byte `backend/logs/error.log`, which should be treated as runtime output and not committed.
+The repository previously tracked Python bytecode cache files under `mushroom-edibility/data/__pycache__/` and `paddy-backend-api/__pycache__/`, plus an empty runtime log. Those generated files have now been removed from the current branch, and the root `.gitignore` excludes Python caches and runtime logs.
 
 ## Empty irrigation placeholders
 
