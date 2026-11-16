@@ -26,7 +26,7 @@ Reports will be reviewed in good faith. Maintainers will investigate and coordin
 The inspected source has security concerns that should be addressed before public production deployment:
 
 1. `backend/index.js` contains a literal Express session secret. Replace it with a unique high-entropy environment secret and configure secure cookie settings.
-2. `api/app.py` loads the Groq key from a tracked `config.json`. Move credentials to a secret manager or environment and rotate any real key that was committed.
+2. Groq credentials were previously stored in tracked JSON configuration files in `api/` and `agrotech-ai-chatbot/`, and a Google API key was present in `agrotech-ai-apis/.env-sample`. The current versions use environment variables and empty samples. Rotate every exposed credential because Git history may still contain the original values.
 3. `frontend/.env.sample` previously included a Mapbox-looking access token. Verify ownership and scope; rotate it if necessary. Keep only intentionally public, restricted tokens in frontend configuration.
 4. `backend/.env.sample` previously supplied a weak JWT placeholder. Use an empty sample and generate a unique secret per environment.
 5. Some Flask APIs configure permissive CORS. Restrict allowed origins before deployment.
