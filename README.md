@@ -611,6 +611,7 @@ Candidate improvements, not claims of existing implementation:
 | Document | Description |
 |---|---|
 | [Documentation home](docs/README.md) | Navigation and contributor reading paths |
+| [Service catalog](docs/service-catalog.md) | Directory-by-directory guide to every application and API service |
 | [Architecture](docs/architecture.md) | Main application and specialist service boundaries |
 | [API overview](docs/api.md) | Endpoint families and integration guidance |
 | [Database](docs/database.md) | MongoDB and data handling |
