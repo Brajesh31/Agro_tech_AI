@@ -2,3 +2,9 @@ Include
 Lib
 Scripts
 pyvenv.cfg
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+config.json
