@@ -36,7 +36,7 @@ AgroTech AI is a multi-service repository. This catalog maps the main directorie
 
 ## Service status caveats
 
-- `irrigation-api/` currently contains a training script and model artifacts, but its `app.py` and `requirements.txt` are empty. It is not a functioning Flask API yet.
+- `irrigation-api/` currently contains a training script and model artifacts, but its `app.py` is empty. The requirements file supports training only. It is not a functioning Flask API yet.
 - Similar API variants may have different schemas and model artifacts. Do not switch frontend URLs based only on matching endpoint names.
 - The root Compose file runs only the main frontend, backend, and MongoDB.
 - Python dependencies and model runtime versions must be isolated by service.
