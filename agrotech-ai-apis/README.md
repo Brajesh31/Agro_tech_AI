@@ -41,7 +41,7 @@ The directory contains serialized model artifacts and supporting data used by th
 
 ## Configuration
 
-Use `.env` for provider credentials such as `GOOGLE_API_KEY`. Never commit a real key or place it in a JSON configuration file. Restrict CORS origins and request sizes before deployment.
+Use `.env` for `GOOGLE_API_KEY`. The tracked `.env-sample` contains an empty placeholder. Never commit a real key or place it in a JSON configuration file. Restrict CORS origins and request sizes before deployment.
 
 ## Validation
 
