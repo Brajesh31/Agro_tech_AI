@@ -13,7 +13,7 @@ This directory contains irrigation-related model training and prediction assets.
 
 ## Important status
 
-**This directory does not currently contain a working Flask API entrypoint.** The `app.py` and `requirements.txt` files are zero bytes. Do not document or deploy this folder as a functioning web API until an application contract, dependencies, and startup command are implemented.
+**This directory does not currently contain a working Flask API entrypoint.** The `app.py` file is zero bytes. The requirements file supports the training script only. Do not deploy this folder as a functioning web API until an inference contract, preprocessing pipeline, endpoint, and tests are implemented.
 
 The training script uses generated/simulated data. Its reported score is not evidence of real-world agronomic accuracy.
 
