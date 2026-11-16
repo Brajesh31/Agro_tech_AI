@@ -626,6 +626,17 @@ Candidate improvements, not claims of existing implementation:
 | [Roadmap](ROADMAP.md) | Future priorities |
 | [Changelog](CHANGELOG.md) | Project change history |
 | [Citation](CITATION.cff) | Citation metadata |
+| [Configuration](docs/configuration.md) | Environment variables and secret handling |
+| [Models and data](docs/models.md) | Model artifacts, provenance, evaluation, and limitations |
+| [Model card template](docs/model-card-template.md) | Standard documentation template for ML models |
+| [Privacy](docs/privacy.md) | Data minimization, retention, and third-party processing |
+| [Testing](docs/testing.md) | Build, test, and smoke-check commands |
+| [GitHub workflows](docs/workflows.md) | CI, automation, permissions, and Dependabot |
+| [Maintenance](docs/maintenance.md) | Routine upkeep and known repository hygiene issues |
+| [Release process](docs/release-process.md) | Validation, tagging, deployment, and rollback |
+| [Frontend service guide](frontend/README.md) | Main React/Vite application |
+| [Backend service guide](backend/README.md) | Express API and MongoDB integration |
+| [Python API service guides](api/README.md) | Service-specific API documentation |
 
 ---
 
