@@ -28,7 +28,7 @@ The repository previously tracked Python bytecode cache files under `mushroom-ed
 
 ## Empty irrigation placeholders
 
-`irrigation-api/app.py` and `irrigation-api/requirements.txt` are empty. The directory contains a training script and model artifacts, but does not currently define a working Flask API. Keep this limitation visible until an API implementation and tests are added.
+`irrigation-api/app.py` remains empty. Its requirements file now lists the dependencies for the training script, but the directory still does not define a working Flask inference API. Keep this limitation visible until an API implementation and tests are added.
 
 ## Large model files
 
