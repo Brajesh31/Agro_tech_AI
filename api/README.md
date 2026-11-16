@@ -6,7 +6,7 @@ This directory contains an independent Flask API implementation with crop, ferti
 
 - `app.py`: Flask application and route definitions.
 - `requirements.txt`: Python dependencies.
-- `config.json`: currently tracked provider configuration, which must not contain real credentials.
+- `.env.sample`: environment variable names for local provider configuration.
 - `*.pkl`, `*.tflite`: serialized models used by the service.
 - `crops/`: crop-specific CSV data and related assets.
 
@@ -25,7 +25,7 @@ Windows PowerShell activation: `.venv\\Scripts\\Activate.ps1`.
 
 ## Configuration
 
-The current application reads Google and Groq provider configuration. Move all credentials to environment variables or a secret manager. Do not commit real values to `config.json`. Rotate any credential that has ever been committed.
+The current application reads Google and Groq provider configuration. Set `GOOGLE_API_KEY` and `GROQ_API_KEY` through a local `.env` file or managed secret store. The service loads environment variables with python-dotenv. The former tracked `config.json` credential file has been removed. Rotate any credential that has ever been committed.
 
 ## Run
 
