@@ -119,13 +119,10 @@ def find_soil_labs():
     else:
         return jsonify({"error": "No valid JSON found in the response."}), 500
 
-# Load API key
-working_dir = os.path.dirname(os.path.abspath(__file__))
-config_data = json.load(open(f"{working_dir}/config.json"))
-GROQ_API_KEY = config_data["GROQ_API_KEY"]
-os.environ["GROQ_API_KEY"] = GROQ_API_KEY
-
-client = Groq()
+# Load provider credentials from the process environment.
+# Never keep API keys in tracked JSON configuration files.
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 
 # Rate limiting variables
 RATE_LIMIT = 20  # Maximum 20 requests per minute
@@ -206,7 +203,10 @@ def chat():
     if premade_requests.get(user_prompt):
         return jsonify({"response": premade_requests[user_prompt]})
 
-    # If not a pre-made prompt, use the LLM
+    # If not a pre-made prompt, use the LLM.
+    if client is None:
+        return jsonify({"error": "Chatbot provider is not configured."}), 503
+
     messages = [
         {'role': "system", "content": "You are an AI assistant for AgroTech AI, an innovative platform that leverages artificial intelligence to enhance agricultural practices. Provide helpful and accurate information about AgroTech AI's services and agricultural technology."},
         {"role": "user", "content": user_prompt}
