@@ -1,92 +1,31 @@
-name: Documentation update
-description: Report missing, unclear, outdated, or incorrect documentation.
+name: "📝 Documentation update"
+description: Report missing, unclear, or inaccurate project documentation.
 title: "[Docs]: "
-labels:
-  - documentation
+labels: ["documentation"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Please describe the reader problem and link to the relevant source file, section, or command. Do not include secrets or private deployment details.
-
-  - type: checkboxes
-    id: existing-issue
-    attributes:
-      label: Existing issue check
-      options:
-        - label: I have searched existing issues and could not find a duplicate.
-          required: true
-
   - type: input
-    id: affected-document
+    id: document
     attributes:
-      label: Affected document
-      description: Provide the path or URL of the page that needs attention.
-      placeholder: docs/installation.md
+      label: Document or path
+      placeholder: "docs/api.md"
     validations:
       required: true
-
-  - type: dropdown
-    id: document-area
-    attributes:
-      label: Documentation area
-      options:
-        - installation
-        - development
-        - architecture
-        - deployment
-        - API
-        - database
-        - troubleshooting
-        - FAQ
-        - project policy
-        - other repository documentation
-    validations:
-      required: true
-
   - type: textarea
-    id: issue-description
+    id: issue
     attributes:
-      label: What is unclear or incorrect?
-      description: Explain the reader's problem and include the current text or command when useful.
-      placeholder: Describe the missing, outdated, or misleading information.
+      label: What is missing or incorrect?
     validations:
       required: true
-
   - type: textarea
-    id: suggested-change
+    id: suggestion
     attributes:
-      label: Suggested change
-      description: Provide corrected wording, commands, examples, or links where possible.
-    validations:
-      required: true
-
-  - type: textarea
-    id: verification
-    attributes:
-      label: Source or verification
-      description: Explain how the proposed information was verified against the code, scripts, deployment, or official documentation.
-      placeholder: I verified this against ...
-
-  - type: dropdown
-    id: audience
-    attributes:
-      label: Primary audience
-      options:
-        - new user
-        - contributor
-        - API integrator
-        - operator or deployer
-        - researcher or model contributor
-    validations:
-      required: true
-
+      label: Suggested correction
   - type: checkboxes
-    id: terms
+    id: check
     attributes:
-      label: Submission checklist
+      label: Checklist
       options:
-        - label: I have read the Contributing Guidelines.
+        - label: I checked the latest version of the document.
           required: true
-        - label: I have removed secrets and private data from this report.
+        - label: I did not include credentials or private user data.
           required: true
