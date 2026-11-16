@@ -60,4 +60,4 @@ Before production deployment:
 - Rotate credentials previously committed to source control.
 - Keep logs free of credentials and personal data.
 
-The user profile GET route is registered with JWT authentication and returns only an allowlist of profile fields. Validate the frontend token handling and the full profile update flow before deployment.
+The user profile GET and PUT routes are registered with JWT authentication. They return only allowlisted profile fields; the update route currently supports first and last name. Email changes are intentionally not supported through this endpoint because they require a separate verification flow.
