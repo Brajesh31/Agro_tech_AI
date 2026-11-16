@@ -19,7 +19,10 @@ All notable changes to AgroTech AI are documented here. This project follows a p
 
 ### Security
 
-- Added explicit guidance for rotating exposed credentials and keeping secrets out of tracked files.
+- Removed tracked Groq JSON credential files and replaced them with environment-based configuration.
+- Replaced a credential-bearing Google API sample with an empty placeholder.
+- Updated chatbot and quiz setup to handle missing provider credentials safely.
+- Added explicit guidance to rotate exposed credentials because the previous values may remain in Git history.
 
 ## Release history
 
