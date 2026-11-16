@@ -1,42 +1,52 @@
-# Security Policy
+# 🔐 Security Policy
 
-## Supported versions
+## Scope
 
-AgroTech AI is currently under active development. Security fixes are applied to the default branch and to the most recent release, when releases are published.
-
-| Version | Support |
-| --- | --- |
-| `main` | Supported |
-| Latest tagged release | Supported |
-| Older or untagged snapshots | Best effort only |
+AgroTech AI contains a browser application, a Node.js/Express backend, MongoDB models, multiple Python APIs, model artifacts, and optional applications. Security reports may concern credentials, authentication, authorization, uploads, model loading, dependencies, personal data, or deployment configuration.
 
 ## Reporting a vulnerability
 
-Please do not disclose security vulnerabilities in a public issue, pull request, discussion, or chat.
-
-Use GitHub's **Report a vulnerability** button on the repository's Security tab when it is available. If private reporting is unavailable, contact the repository maintainers through the private contact information listed in the repository owner profile and include `AgroTech AI security report` in the subject.
+Do not publish exploitable vulnerabilities in public issues. Contact the repository owner privately through GitHub's available security reporting or contact controls.
 
 Include:
-
-- A clear description of the vulnerability and affected service/path.
+- A concise description and affected service or file.
+- The affected commit or deployment, if known.
 - Reproduction steps or a minimal proof of concept.
-- The impact and realistic attack prerequisites.
-- Affected commit, version, or deployment.
-- Suggested remediation, if known.
+- The potential impact.
+- Suggested mitigation, if available.
 
-Please redact credentials, personal data, farmer data, private URLs, and production identifiers. If a secret is exposed, report it without including the secret value and rotate it immediately.
+Do not include passwords, private keys, tokens, real user records, or confidential images in a report.
 
-## Response process
+## Response expectations
 
-Maintainers will acknowledge a report within 7 days when contact details are provided, investigate the report, and coordinate a fix or mitigation. Timelines depend on severity, reproducibility, and the affected deployment. Credit will be given to reporters who request it and follow coordinated disclosure.
+Reports will be reviewed in good faith. Maintainers will investigate and coordinate fixes or mitigations where practicable. A public advisory may be published after a fix is available. Reporter attribution requires permission.
 
-## Security expectations for contributors
+## Immediate remediation priorities
 
-- Store secrets in environment variables or a managed secret store, never in source or JSON configuration.
-- Use the least privilege necessary for API keys, databases, storage, and deployment identities.
-- Validate uploaded files, request sizes, content types, and user input.
-- Do not log tokens, passwords, session cookies, or sensitive agricultural/user data.
-- Review dependency and model provenance before deployment.
-- Rotate any credential that has appeared in a tracked file, log, issue, or pull request.
+The inspected source has security concerns that should be addressed before public production deployment:
 
-The platform provides decision-support predictions. It must not be represented as a guarantee of crop, plant-health, financial, or safety outcomes.
+1. `backend/index.js` contains a literal Express session secret. Replace it with a unique high-entropy environment secret and configure secure cookie settings.
+2. `api/app.py` loads the Groq key from a tracked `config.json`. Move credentials to a secret manager or environment and rotate any real key that was committed.
+3. `frontend/.env.sample` previously included a Mapbox-looking access token. Verify ownership and scope; rotate it if necessary. Keep only intentionally public, restricted tokens in frontend configuration.
+4. `backend/.env.sample` previously supplied a weak JWT placeholder. Use an empty sample and generate a unique secret per environment.
+5. Some Flask APIs configure permissive CORS. Restrict allowed origins before deployment.
+6. Review exception handlers for responses that may expose provider or server details.
+7. `backend/routes/users.js` contains an incomplete route registration. Verify route loading and tests.
+8. `backend/logs/error.log` is tracked in the inspected tree. Review for sensitive content, remove runtime logs from source control, and rotate any exposed credentials.
+
+## Security requirements
+
+- Revoke and rotate committed real credentials. Removing a key from the latest revision does not invalidate it.
+- Keep private keys and tokens out of source, notebooks, images, logs, issues, and pull requests.
+- Restrict CORS, database network access, and administrative endpoints.
+- Validate authentication and authorization on every protected action.
+- Validate uploaded file type, size, and content.
+- Use secure cookies and HTTPS in deployed environments.
+- Avoid exposing debug tracebacks.
+- Review dependencies and model artifacts before loading or executing them.
+- Treat pickle/joblib files as executable content and load only trusted artifacts.
+- Define retention and deletion policies for personal data and uploaded files.
+
+## Data and model safety
+
+Never commit production database exports, private user records, provider credentials, or unreviewed model files. Keep dataset provenance, model version, preprocessing, and compatible library versions documented.
