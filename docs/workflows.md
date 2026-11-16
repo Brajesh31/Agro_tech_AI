@@ -7,6 +7,8 @@ The repository currently contains workflows for CodeQL analysis, issue and pull 
 | Workflow | Trigger | Purpose |
 |---|---|---|
 | `codeql.yml` | Push, PR, schedule, manual | CodeQL analysis for Actions, JavaScript/TypeScript, and Python |
+| `ci.yml` | Push, PR, manual | Frontend lint/build, backend JavaScript syntax, quiz build, and Python syntax |
+| `refresh-frontend-lockfile.yml` | Frontend package manifest change, manual | Regenerate and commit the frontend npm lockfile |
 | `update-readme.yml` | Push, hourly schedule, manual | Update README timestamp and push a commit |
 | `close-old-issue.yml` | Daily schedule, manual | Mark and close stale issues |
 | `close-old-pr.yml` | Daily schedule, PR events, manual | Mark and close stale pull requests |
