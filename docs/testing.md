@@ -21,7 +21,7 @@ npm ci
 npm test
 ```
 
-The current test script invokes Jest. Review `backend/test/` to understand the actual test coverage. A successful Jest command does not imply every route, role, or external integration is covered.
+The current test script invokes Jest. The existing test file expects a reachable MongoDB test database and currently is not part of the database-independent CI job. Run it locally only with an isolated test database configured through `MONGODB_URL`. Review `backend/test/` to understand its actual coverage. A successful Jest command does not imply every route, role, or external integration is covered.
 
 ## Quiz application
 
