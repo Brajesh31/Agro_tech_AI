@@ -1,99 +1,50 @@
-name: Feature request
-description: Propose a focused improvement to AgroTech AI.
+name: "✨ Feature request"
+description: Propose a focused improvement to the platform or one of its services.
 title: "[Feature]: "
-labels:
-  - enhancement
+labels: ["enhancement"]
 body:
-  - type: markdown
+  - type: dropdown
+    id: area
     attributes:
-      value: |
-        Strong proposals describe the user problem and measurable outcome. For model features, include data quality, safety, privacy, and evaluation considerations.
-
-  - type: checkboxes
-    id: existing-issue
-    attributes:
-      label: Existing issue check
+      label: Platform area
       options:
-        - label: I have searched existing issues and could not find a duplicate.
-          required: true
-
+        - Frontend / user experience
+        - Backend / API
+        - Agricultural ML model
+        - Database / data
+        - Chatbot / AI
+        - Deployment / DevOps
+        - Documentation
+        - Other
+    validations:
+      required: true
   - type: textarea
     id: problem
     attributes:
-      label: User problem
-      description: Who is affected, and what problem or opportunity should the project address?
-      placeholder: Farmers, operators, or contributors currently ...
+      label: Problem to solve
     validations:
       required: true
-
   - type: textarea
-    id: proposed-solution
+    id: proposal
     attributes:
-      label: Proposed solution
-      description: Describe the behavior, interface, endpoint, or workflow you want.
+      label: Proposed behavior
     validations:
       required: true
-
   - type: textarea
-    id: success-criteria
+    id: validation
     attributes:
-      label: Success criteria
-      description: How would we know this feature is useful and complete?
-      placeholder: A user can ...; the API returns ...; evaluation reaches ...
-    validations:
-      required: true
-
+      label: Validation approach
+      description: Explain how the change will be tested. For ML changes, include dataset provenance and evaluation methodology.
   - type: textarea
     id: alternatives
     attributes:
       label: Alternatives considered
-      description: Describe other approaches or current workarounds.
-
-  - type: dropdown
-    id: affected-area
-    attributes:
-      label: Affected area
-      options:
-        - frontend
-        - backend
-        - AI/ML API
-        - chatbot
-        - quiz application
-        - deployment and operations
-        - documentation
-        - developer tooling
-    validations:
-      required: true
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Priority
-      options:
-        - high
-        - medium
-        - low
-    validations:
-      required: true
-
-  - type: textarea
-    id: safety-data
-    attributes:
-      label: Safety, privacy, and data considerations
-      description: Note personal data, uploaded images, model limitations, consent, external providers, or other risks.
-
-  - type: textarea
-    id: supporting-material
-    attributes:
-      label: Supporting material
-      description: Add sanitized screenshots, mockups, examples, research, or links.
-
   - type: checkboxes
-    id: terms
+    id: checklist
     attributes:
-      label: Submission checklist
+      label: Checklist
       options:
-        - label: I have read the Contributing Guidelines.
+        - label: I checked for an existing issue.
           required: true
-        - label: I have removed secrets and private data from this proposal.
+        - label: This request does not disclose private user data or credentials.
           required: true
