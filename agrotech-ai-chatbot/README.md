@@ -1,12 +1,12 @@
-# AgroTech AI Chatbot
+# 🤖 AgroTech AI Chatbot API
 
-This directory contains the Streamlit agricultural chatbot. The chatbot provides conversational assistance through the Groq client and is separate from the Flask APIs and the main web application.
+This directory contains a Flask-based agricultural chatbot API that uses the Groq client for generated responses and includes predefined answers for common AgroTech AI questions. It is a standalone service, separate from the primary Express backend.
 
 ## Requirements
 
-- Python 3
-- A Groq API key
-- The packages pinned in [`requirements.txt`](requirements.txt)
+- Python 3.9 or a compatible version supported by the selected Flask/Groq packages
+- pip
+- A Groq API key for generated responses
 
 ## Setup
 
@@ -15,23 +15,34 @@ py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -r requirements.txt
+Copy-Item .env.sample .env
 ```
 
-Configure the provider credential through a local secret mechanism. The application currently reads its configuration from `src/config.json`; do not put a real key in a committed file. Prefer migrating local and deployment configuration to an environment variable such as `GROQ_API_KEY`.
+Set `GROQ_API_KEY` in the local `.env` file or deployment environment. Never add real credentials to `src/config.json`, source code, or Git.
 
 ## Run
 
+From this directory:
+
 ```powershell
-streamlit run src\main.py
+python src\main.py
 ```
 
-Streamlit normally opens <http://localhost:8501>.
+The Flask development server defaults to port 5000. Do not use the development server in production. Use a production WSGI server and configure TLS, authentication as required, request limits, and explicit CORS origins.
 
-## Development notes
+## API
 
-- Keep prompts and response handling resilient to provider errors and rate limits.
-- Do not log API keys, user conversations, or personal information.
-- Treat generated advice as informational and direct users to qualified agricultural experts for consequential decisions.
-- Add sanitized fixtures and provider-mocked tests before changing conversation behavior.
+The service exposes `POST /AgroTech-ChatBot`. The request body is JSON with a `prompt` field. Several predefined prompts can be answered without calling Groq. Other prompts require `GROQ_API_KEY`; when it is not configured, the service responds with HTTP 503.
 
-See the repository-level [`CONTRIBUTING.md`](../CONTRIBUTING.md) and [`SECURITY.md`](../SECURITY.md) for contribution and security requirements.
+The current implementation applies an in-memory per-IP rate limit. This is process-local and is not a substitute for a distributed production rate limiter.
+
+## Security and privacy
+
+- Do not log API keys or private conversations.
+- Restrict CORS to the intended frontend origins.
+- Validate JSON bodies and prompt length.
+- Use a managed secret store in deployment.
+- Review provider data handling before sending user prompts.
+- Treat generated agricultural content as informational, not authoritative agronomic advice.
+
+See the repository [security policy](../SECURITY.md) and [API guide](../docs/api.md).
