@@ -3,7 +3,10 @@ from flask_cors import CORS
 import os
 import logging
 from groq import Groq
+from dotenv import load_dotenv
 import time
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
