@@ -5,7 +5,26 @@ import adminImage from '../assets/agrorent/admin.jpg';
 import farmerImage from '../assets/agrorent/farmer.jpg';
 import vendorImage from '../assets/agrorent/vendor.jpg';
 import customerImage from '../assets/agrorent/customer.jpg';
-import heroImage from '../assets/bgHero.png'; 
+import heroImage from '../assets/bgHero.png';
+
+const API_URL = process.env.NODE_ENV === 'production'
+  ? 'https://agrotech-ai-11j3.onrender.com'
+  : 'http://localhost:8080';
+
+const getAuthSession = () => {
+  try {
+    return JSON.parse(localStorage.getItem('auth') || 'null');
+  } catch {
+    return null;
+  }
+};
+
+const getUserIdFromToken = (token) => {
+  const payload = token.split('.')[1];
+  const normalized = payload.replace(/-/g, '+').replace(/_/g, '/');
+  const decoded = atob(normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '='));
+  return JSON.parse(decoded).userId;
+};
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -14,26 +33,6 @@ const Profile = () => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null);
-  const ApiUrl = process.env.NODE_ENV === 'production'
-  ? 'https://agrotech-ai-11j3.onrender.com'
-  : 'http://localhost:8080';
-
-
-  const getAuthSession = () => {
-    try {
-      return JSON.parse(localStorage.getItem('auth') || 'null');
-    } catch {
-      return null;
-    }
-  };
-
-  const getUserIdFromToken = (token) => {
-    const payload = token.split('.')[1];
-    const normalized = payload.replace(/-/g, '+').replace(/_/g, '/');
-    const decoded = atob(normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '='));
-    return JSON.parse(decoded).userId;
-  };
-
   useEffect(() => {
     const authSession = getAuthSession();
     const token = authSession?.token;
@@ -53,7 +52,7 @@ const Profile = () => {
       return;
     }
 
-    axios.get(`${ApiUrl}/api/users/${userId}`, {
+    axios.get(`${API_URL}/api/users/${userId}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -95,7 +94,7 @@ const Profile = () => {
       return;
     }
 
-    axios.put(`${ApiUrl}/api/users/${userId}`, {
+    axios.put(`${API_URL}/api/users/${userId}`, {
       firstName: formData.firstName,
       lastName: formData.lastName
     }, {
