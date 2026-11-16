@@ -10,6 +10,7 @@ The backend is in [`backend/index.js`](../backend/index.js). Its public applicat
 | --- | --- | --- |
 | GET | `/` | Backend status |
 | POST | `/api/send-email` | Send an application email |
+| GET | `/api/users/:id` | Read an authenticated user's safe profile fields (self or admin) |
 
 Additional authentication, user, payment, and application routes may be registered by backend route modules. Review `backend/routes/` and controllers before integrating.
 
