@@ -17,7 +17,7 @@ AgroTech AI is a multi-service repository. This catalog maps the main directorie
 |---|---|---|
 | Consolidated AI APIs | `agrotech-ai-apis/` | [API README](../agrotech-ai-apis/README.md) |
 | Additional API variant | `api/` | [API README](../api/README.md) |
-| Legacy API variant | `agrotech-api`s/` | [Legacy API README](../agrotech-api%60s/README.md) |
+| Legacy API variant | ``agrotech-api`s/`` | [Legacy API README](../agrotech-api%60s/README.md) |
 
 ## Specialist APIs
 
