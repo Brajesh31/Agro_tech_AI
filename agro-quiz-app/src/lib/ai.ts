@@ -2,12 +2,15 @@ require('dotenv').config();
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const apiKey = process.env.GOOGLE_API_KEY;
-
-const genAI = new GoogleGenerativeAI(apiKey);
-
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+const model = apiKey
+    ? new GoogleGenerativeAI(apiKey).getGenerativeModel({ model: "gemini-pro" })
+    : null;
 
 export const createPrompt = async (title: string) => {
+    if (!model) {
+        return { status: false, message: "GOOGLE_API_KEY is not configured." };
+    }
+
     try {
         const prompt = `Generate only one prompt not question for creating quiz question topic is ${title} and start prompt just after [[ and end the prompt with ]]`;
         const result = await model.generateContent(prompt);
@@ -26,6 +29,10 @@ export const createPrompt = async (title: string) => {
 };
 
 export const generateQuestion = async (generatedPrompt: string) => {
+    if (!model) {
+        return { status: false, message: "GOOGLE_API_KEY is not configured." };
+    }
+
 	try {
 		const prompt = `I want only one question. ${generatedPrompt} and start question just after [[ and end the question with ]]. And also give me the 4 options and answer. Answer should be one of the option without any special symbol. 1st option starts with $$ and end with $$. 2nd option starts with @@ and end with @@. 3rd option starts with ## and end with ##. 4th option starts with && and end with &&. Correct Answer starts with ~~~ and end with ~~~`;
 		const result = await model.generateContent(prompt);
