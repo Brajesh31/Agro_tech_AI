@@ -53,7 +53,7 @@ This repository is a large monorepo, not one single deployable application. Each
 | Specialist AI services | Multiple Flask applications |
 | Model runtime | TensorFlow / TensorFlow Lite, scikit-learn, joblib and pickle artifacts |
 | Quiz application | Next.js, React, TypeScript |
-| Chatbot application | Streamlit and Groq integration |
+| Chatbot application | Flask and Groq integration |
 | Authentication integrations | JWT and Google OAuth modules |
 | Email | Nodemailer |
 | Payments | Stripe integration points |
@@ -81,7 +81,7 @@ AgroTech AI is organized into several independently maintained areas.
 | Seed quality | `seed-qual-predictor/` | Seed quality prediction |
 | Soil labs | `soil-testing-labs-api/` | Soil testing laboratory lookup |
 | Electrical/electronics shops | `electrical-electronics-shops-api/` | Location-based shop lookup |
-| Agricultural chatbot | `agrotech-ai-chatbot/` | Streamlit-based conversational assistant |
+| Agricultural chatbot | `agrotech-ai-chatbot/` | Flask-based conversational API |
 
 Some services overlap in their feature scope. Treat the API variants as separate implementations until a tested migration or consolidation is complete.
 
@@ -141,7 +141,7 @@ MongoDB              External integrations
 
 Optional independent applications:
    |-- agro-quiz-app/ (Next.js)
-   `-- agrotech-ai-chatbot/ (Streamlit)
+   `-- agrotech-ai-chatbot/ (Flask + Groq)
 ```
 
 The frontend is configured with Vite and uses `VITE_BACKEND_BASE_URL` to find the application backend. The Express service registers modules from `backend/routes/` and connects to MongoDB using `MONGODB_URL`.
@@ -172,7 +172,7 @@ For detailed service boundaries, see [Architecture](docs/architecture.md).
 | TensorFlow / TFLite | Neural network inference |
 | scikit-learn | Classical ML models and preprocessing |
 | pandas / NumPy | Data processing |
-| Streamlit | Standalone chatbot interface |
+| Flask | Standalone chatbot API |
 | Next.js / TypeScript | Standalone quiz application |
 | Docker Compose | Local orchestration |
 | GitHub Actions | Repository automation |
@@ -251,7 +251,7 @@ docker compose -f Docker-compose.yml down -v
 
 The final command removes the named MongoDB volume. It permanently deletes the local data stored there.
 
-**Important:** this Compose file does not start every Flask service, the Streamlit chatbot, or the Next.js quiz application.
+**Important:** this Compose file does not start every Flask service, the standalone Groq chatbot API, or the Next.js quiz application.
 
 ---
 
@@ -341,15 +341,19 @@ python app.py
 
 Other services follow the same pattern, but check their `app.py`, configuration files, and model paths before starting. Some use a different launcher or expect local model artifacts.
 
-### Streamlit chatbot
+### Groq chatbot API
 
 ```powershell
 cd agrotech-ai-chatbot
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-streamlit run src\main.py
+Copy-Item .env.sample .env
+# Set GROQ_API_KEY in .env, then:
+python src\main.py
 ```
+
+The service is a Flask API, not a Streamlit application.
 
 ### Next.js quiz application
 
@@ -487,7 +491,7 @@ Create a service-specific virtual environment, install its requirements, start t
 Security review is required before public deployment. The inspected source contains problems that should be treated as priority remediation items:
 
 1. **Hard-coded Express session secret:** `backend/index.js` currently configures a literal session secret. Replace it with a high-entropy environment secret, rotate sessions, and configure secure cookie settings.
-2. **Tracked Groq credential configuration:** `api/app.py` loads the Groq key from a tracked `config.json`. Move the credential to a secret environment variable and rotate the existing key if it was ever real.
+2. **Previously tracked provider credentials:** Groq keys were stored in JSON config files in two services, and a Google API key was present in a tracked sample. Those values have been removed from the current files. Rotate them with the providers because Git history may still contain the originals.
 3. **Frontend token in example file:** `frontend/.env.sample` contains a Mapbox-looking public token. Verify ownership and scope, rotate if necessary, and keep only intentionally public restricted tokens in the sample.
 4. **Weak sample JWT value:** `backend/.env.sample` currently sets `JWT_SECRET=secret`. Replace this with an empty placeholder and generate a unique secret per environment.
 5. **Open CORS configuration:** some Flask APIs allow all origins. Restrict origins to known frontend domains for deployment.
