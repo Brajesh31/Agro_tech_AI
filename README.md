@@ -490,13 +490,13 @@ Create a service-specific virtual environment, install its requirements, start t
 
 Security review is required before public deployment. The inspected source contains problems that should be treated as priority remediation items:
 
-1. **Hard-coded Express session secret:** `backend/index.js` currently configures a literal session secret. Replace it with a high-entropy environment secret, rotate sessions, and configure secure cookie settings.
+1. **Session secret:** the literal session secret has been removed. The backend now requires `SESSION_SECRET` in production and uses secure, HTTP-only cookies.
 2. **Previously tracked provider credentials:** Groq keys were stored in JSON config files in two services, and a Google API key was present in a tracked sample. Those values have been removed from the current files. Rotate them with the providers because Git history may still contain the originals.
 3. **Frontend token in example file:** `frontend/.env.sample` contains a Mapbox-looking public token. Verify ownership and scope, rotate if necessary, and keep only intentionally public restricted tokens in the sample.
 4. **Weak sample JWT value:** `backend/.env.sample` currently sets `JWT_SECRET=secret`. Replace this with an empty placeholder and generate a unique secret per environment.
-5. **Open CORS configuration:** some Flask APIs allow all origins. Restrict origins to known frontend domains for deployment.
+5. **CORS:** the Express backend now restricts origins using `FRONTEND_ORIGIN`. Several Flask APIs still need the same allowlist treatment before public deployment.
 6. **Verbose error responses:** inspect API handlers to ensure provider and server exceptions are not sent directly to public clients.
-7. **Incomplete route implementation:** `backend/routes/users.js` includes an incomplete `router.get('/users/:id', )` registration. Validate route loading and automated tests before deployment.
+7. **User profile route:** the incomplete Express route has been connected to an authenticated controller that returns only an allowlist of profile fields. Test the frontend authentication flow before relying on it.
 8. **Untracked-log hygiene:** `backend/logs/error.log` is tracked. Confirm it contains no sensitive values, remove runtime logs from Git, and rotate exposed credentials as necessary.
 
 ### Immediate security actions
