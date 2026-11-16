@@ -7,6 +7,14 @@ This documentation describes the multi-service AgroTech AI repository. Start wit
 | Guide | Purpose |
 |---|---|
 | [Architecture](architecture.md) | Main app, backend, database, and specialist service boundaries |
+| [Configuration](configuration.md) | Environment variables and secret handling |
+| [Models and data](models.md) | Model artifacts, provenance, evaluation, and limitations |
+| [Model card template](model-card-template.md) | Standard documentation template for ML models |
+| [Privacy](privacy.md) | Data minimization, retention, and third-party processing |
+| [Testing](testing.md) | Build, test, and smoke-check commands |
+| [GitHub workflows](workflows.md) | CI, automation, permissions, and Dependabot |
+| [Maintenance](maintenance.md) | Routine upkeep and known repository hygiene issues |
+| [Release process](release-process.md) | Validation, tagging, deployment, and rollback |
 | [API overview](api.md) | Endpoint families, request handling, and integration expectations |
 | [Database](database.md) | MongoDB, data handling, and privacy |
 | [Deployment](deployment.md) | Local containers, service-specific hosting, and release checks |
