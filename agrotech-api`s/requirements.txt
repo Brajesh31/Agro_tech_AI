@@ -15,6 +15,6 @@ scikit-learn==1.5.1
 scipy==1.14.0
 six==1.16.0
 threadpoolctl==3.5.0
-tzdata==2024.1
+tzdata==2026.5
 Werkzeug==3.0.3
 gunicorn
